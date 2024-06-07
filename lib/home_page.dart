@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_counter_app/cubit/counter_cubit.dart';
+import 'package:flutter_bloc_counter_app/bloc/counter_bloc.dart' as bloc;
+import 'package:flutter_bloc_counter_app/cubit/counter_cubit.dart' as cubit;
 import 'package:flutter_bloc_counter_app/inc_Dec_page.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -10,7 +11,9 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counterCubit = BlocProvider.of<CounterCubit>(context);
+    final counterCubit = BlocProvider.of<cubit.CounterCubit>(context);
+    final counterBloc = BlocProvider.of<bloc.CounterBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -23,8 +26,8 @@ class MyHomePage extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            BlocBuilder<CounterCubit, CounterState>(
-                bloc: counterCubit,
+            BlocBuilder<bloc.CounterBloc, bloc.CounterState>(
+                // bloc: counterBloc, 
                 builder: (context, counter) {
                   return Text(
                     '${counter.counterValue}',
